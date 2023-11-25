@@ -1,0 +1,75 @@
+getwd()
+setwd("C:\\Users\\Dell\\OneDrive\\Desktop")
+getwd()
+#importdataset
+var1<- read.csv("DATA 3.csv", header = TRUE)
+var1
+#get data in the editor mode
+fix(var1)
+
+#rename the column
+names(var1)<-c("Age","Gender","Accomodation")
+fix(var1)
+
+#rename the categorical data
+var1$Gender<-factor(var1$Gender,c(1,2),c("male","female"))
+fix(var1)
+
+#rename the categorical data 
+var1$Accomodation<-factor(var1$Accomodation,c(1,2,3),c("Home","boaderd","lodging"))
+fix(var1)
+
+#upload data to data sheet
+attach(var1)
+
+
+
+#Q2
+#create frequency table
+gender.freq<-table(Gender)
+acc.freq<-table(Accomodation)
+age.freq<-table(Age)
+
+gender.freq
+acc.freq
+age.freq
+
+#pie chart for gender
+pie(gender.freq,"pie chart for gender")
+pie(acc.freq,"pie chart for Accomodation")
+pie(age.freq,"pie chart for Age")
+
+#barplot
+barplot(gender.freq,main = "bar plot for gender" ,ylab = "frequency")
+abline(h=0)
+
+barplot(acc.freq,main = "bar plot for Accomodation" ,ylab = "frequency")
+#x axis
+abline(h=0)
+
+barplot(age.freq,main = "bar plot for age" ,ylab = "frequency")
+abline(h=0)
+
+#boxplot
+boxplot(Age,main="Boxplot for Age ",ylab="Age",outpch=8)
+
+#Q3 two way freq table
+gender_acc.freq<-table(Gender,Accomodation)
+gender_acc.freq
+
+#stack bar chart
+barplot(gender_acc.freq,main="Gender & Accomodation",legend=row.names(gender_acc.freq))
+abline(h=0)
+
+#cluster bar chart
+barplot(gender_acc.freq,beside=TRUE,main="Gender & Accomodation",legend=row.names(gender_acc.freq))
+abline(h=0)
+
+#Q4 side by side boxplot
+boxplot(Age~Gender,main="boxplot for age by gender",xlab="Gender",ylab = "Age")
+
+boxplot(Age~Accomodation,main="boxplot for age by Accomodation",xlab="Accomodation",ylab = "Age")
+
+#Q5 
+
+xtabs(Age~Gender+Accomodation)/gender_acc.freq
